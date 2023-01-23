@@ -1,28 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".LoginFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/textview_first"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_first_fragment"
-        app:layout_constraintBottom_toTopOf="@id/button_first"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <variable
+            name="firebaseClient"
+            type="com.bitpunchlab.android.openaichatter.firebase.FirebaseClientViewModel" />
+    </data>
 
-    <Button
-        android:id="@+id/button_first"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_first" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".userAccount.LoginFragment">
+
+        <ImageView
+            android:id="@+id/art_login"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/login"
+            tools:srcCompat="@drawable/login" />
+
+        <TextView
+            android:id="@+id/textview_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/login"
+            android:textColor="@color/black"
+            android:textSize="@dimen/title_text_size"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/art_login" />
+
+        <TextView
+            android:id="@+id/textview_email_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="@dimen/content_left_right_margin"
+            android:layout_marginRight="@dimen/content_left_right_margin"
+            android:text="@string/email"
+            android:textColor="@color/black"
+            android:textSize="@dimen/content_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_title" />
+
+        <EditText
+            android:id="@+id/editText_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/content_left_right_margin"
+            android:layout_marginRight="@dimen/content_left_right_margin"
+            android:textColor="@color/blue_hint"
+            android:textSize="@dimen/content_text_size"
+            android:text="@={firebaseClient.userEmail}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_email_title"
+            />
+
+        <TextView
+            android:id="@+id/email_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/error_left_right_margin"
+            android:layout_marginRight="@dimen/error_left_right_margin"
+            android:textColor="@color/error_red"
+            android:textSize="@dimen/error_text_size"
+            android:text="@{firebaseClient.emailError}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editText_email"/>
+
+        <TextView
+            android:id="@+id/textview_password_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/content_left_right_margin"
+            android:layout_marginRight="@dimen/content_left_right_margin"
+            android:text="@string/password"
+            android:textColor="@color/black"
+            android:textSize="@dimen/content_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/email_error" />
+
+        <EditText
+            android:id="@+id/editText_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/content_text_size"
+            android:layout_marginLeft="@dimen/content_left_right_margin"
+            android:layout_marginRight="@dimen/content_left_right_margin"
+            android:textColor="@color/blue_hint"
+            android:text="@={firebaseClient.userPassword}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_password_title"
+            />
+
+        <TextView
+            android:id="@+id/password_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/error_left_right_margin"
+            android:layout_marginRight="@dimen/error_left_right_margin"
+            android:textColor="@color/error_red"
+            android:textSize="@dimen/error_text_size"
+            android:text="@{firebaseClient.passwordError}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editText_password"/>
+
+        <Button
+            android:id="@+id/button_send"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/button_left_right_margin"
+            android:layout_marginRight="@dimen/button_left_right_margin"
+            android:layout_marginTop="30dp"
+            android:text="@string/send"
+            android:textSize="@dimen/button_text_size"
+            android:padding="@dimen/button_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/password_error"
+             />
+
+        <Button
+            android:id="@+id/button_create_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/button_left_right_margin"
+            android:layout_marginRight="@dimen/button_left_right_margin"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="50dp"
+            android:text="@string/create_account"
+            android:textSize="@dimen/button_text_size"
+            android:padding="@dimen/button_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_send"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

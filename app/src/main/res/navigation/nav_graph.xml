@@ -7,22 +7,31 @@
 
     <fragment
         android:id="@+id/LoginFragment"
-        android:name="com.bitpunchlab.android.openaichatter.LoginFragment"
-        android:label="Login"
+        android:name="com.bitpunchlab.android.openaichatter.userAccount.LoginFragment"
+        android:label="@string/login"
         tools:layout="@layout/fragment_login">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            android:id="@+id/toCreateAccountAction"
+            app:destination="@id/createAccountFragment" />
+
+        <action
+            android:id="@+id/toMainAction"
             app:destination="@id/MainFragment" />
     </fragment>
     <fragment
         android:id="@+id/MainFragment"
         android:name="com.bitpunchlab.android.openaichatter.MainFragment"
-        android:label="Main Page"
+        android:label="@string/main_page"
         tools:layout="@layout/fragment_main">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/LoginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/createAccountFragment"
+        android:name="com.bitpunchlab.android.openaichatter.userAccount.CreateAccountFragment"
+        android:label="@string/create_account"
+        tools:layout="@layout/fragment_create_account" />
 </navigation>
