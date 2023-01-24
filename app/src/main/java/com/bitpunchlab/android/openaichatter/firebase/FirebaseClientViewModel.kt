@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.*
+import com.bitpunchlab.android.openaichatter.App_State
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.util.*
@@ -14,12 +15,13 @@ class FirebaseClientViewModel(application: Application) : AndroidViewModel(appli
 
     var auth : FirebaseAuth = FirebaseAuth.getInstance()
 
-
     private var authStateListener = FirebaseAuth.AuthStateListener {
         if (auth.currentUser != null) {
             // logged in
+            _appState.postValue(App_State.LOGGED_IN)
         } else {
             // not logged in
+            _appState.postValue(App_State.LOGGED_OUT)
         }
     }
 
@@ -48,6 +50,9 @@ class FirebaseClientViewModel(application: Application) : AndroidViewModel(appli
     private fun sumFieldsValue() : Boolean {
         return fieldsValidArray.sum() == 4
     }
+
+    var _appState = MutableLiveData<App_State>(App_State.NORMAL)
+    val appState get() = _appState
 
     private val nameValid: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         addSource(userName) { name ->
