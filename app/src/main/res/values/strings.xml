@@ -19,4 +19,8 @@
     <string name="name">Name:</string>
     <string name="confirm_password">Confirm Password:</string>
     <string name="main_page">Main Page</string>
+    <string name="text_completion">Text Completion</string>
+    <string name="generate_image">Generate Image</string>
+    <string name="create_image">Create Image</string>
+    <string name="edit_image">Edit Image</string>
 </resources>

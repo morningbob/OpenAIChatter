@@ -1,13 +1,14 @@
 package com.bitpunchlab.android.openaichatter.openAI
 
 import com.bitpunchlab.android.openaichatter.Constants
-import com.bitpunchlab.android.openaichatter.models.APIRequest
-import com.bitpunchlab.android.openaichatter.models.APIResponse
+import com.bitpunchlab.android.openaichatter.models.CompletionResponse
+import com.bitpunchlab.android.openaichatter.models.ImageResponse
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
 
@@ -22,11 +23,16 @@ object OPENAI_API {
 }
 
 interface OpenAIAPIService {
-    //"Content-Type: application/json"})
-    //val requestBody = ResponseBody
-    @Headers("Authorization: Bearer ${Constants.OPENAI_API_KEY}",
-        "Content-Type: application/json")
+
     @POST("completions")
-    //fun getCompletion() : Call<APIResponse>
-    fun getCompletion(@Body data: APIRequest) : Call<ResponseBody>
+    fun getCompletion(@Body data: HashMap<String, Any>, @Header("Authorization") token: String,
+        @Header("Content-Type") type: String) : Call<CompletionResponse>
+
+    @POST("images/generations")
+    fun getImage(@Body data: HashMap<String, Any>, @Header("Authorization") token: String,
+         @Header("Content-Type") type: String) : Call<ImageResponse>
+
+    @POST("images/variations")
+    fun getImageEdited(@Body data: HashMap<String, Any>, @Header("Authorization") token: String,
+        @Header("Content-Type") type: String) : Call<ImageResponse>
 }
